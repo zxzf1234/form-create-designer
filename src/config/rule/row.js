@@ -12,6 +12,7 @@ export default {
         return {
             type: 'FcRow',
             props: {},
+            fullWidth: true,
             children: []
         };
     },

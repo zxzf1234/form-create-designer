@@ -51,5 +51,11 @@ export default function form({t}) {
             value: false,
             title: t('form.resetBtn'),
         },
+        {
+            type: 'switch',
+            field: 'inline',
+            value: false,
+            title: t('form.inline'),
+        },
     ];
 }

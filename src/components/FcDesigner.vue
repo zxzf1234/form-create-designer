@@ -140,6 +140,11 @@
 ._fc-m-drag > form, ._fc-m-drag > form > .el-row {
     height: 100%;
 }
+
+.el-form--inline [data-draggable] {
+    display: inline-flex;
+    vertical-align: middle;
+}
 </style>
 
 <template>
@@ -190,7 +195,7 @@
                     <ElMain style="background: #F5F5F5;padding: 20px;">
                         <div class="_fc-m-drag">
                             <DragForm :rule="dragForm.rule" :option="form.value"
-                                      v-model:api="dragForm.api"></DragForm>
+                                      v-model:api="dragForm.api" style="border: 1px solid red;"></DragForm>
                         </div>
                     </ElMain>
                 </ElContainer>
@@ -289,7 +294,7 @@ export default defineComponent({
         const fcx = reactive({active: null});
         provide('fcx', fcx);
         provide('designer', vm);
-
+        window.console.log(ruleList)
         const config = toRef(props, 'config', {});
         const baseRule = toRef(config.value, 'baseRule', null);
         const componentRule = toRef(config.value, 'componentRule', {});
@@ -357,7 +362,7 @@ export default defineComponent({
                 },
                 value: {
                     form: {
-                        inline: false,
+                        inline: true,
                         hideRequiredAsterisk: false,
                         labelPosition: 'right',
                         size: 'small',
@@ -907,6 +912,7 @@ export default defineComponent({
                         children.splice(newIndex, 0, rule[0]);
                     }
                 } else {
+                    window.console.log(ruleList)
                     const rule = methods.makeRule(ruleList[menu.name]);
                     children.splice(newIndex, 0, rule);
                 }
@@ -924,6 +930,7 @@ export default defineComponent({
                 // data.dragForm.api.refresh();
             },
             makeRule(config, _rule) {
+                window.console.log(config)
                 const rule = _rule || config.rule({t});
                 rule.config = {config};
                 if (config.component) {
@@ -960,6 +967,7 @@ export default defineComponent({
                             dragBtn: config.dragBtn !== false,
                             children: config.children,
                             mask: dragMask,
+                            fullWidth: rule.fullWidth
                         },
                         effect: {
                             _fc_tool: true
@@ -1005,6 +1013,7 @@ export default defineComponent({
                             dragBtn: config.dragBtn !== false,
                             children: config.children,
                             mask: dragMask,
+                            fullWidth: rule.fullWidth
                         },
                         effect: {
                             _fc_tool: true

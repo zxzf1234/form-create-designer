@@ -17,6 +17,7 @@ const En = {
         resetBtn: 'Whether to display the form reset button',
         submit: 'Submit',
         reset: 'Reset',
+        inline: 'inline mode',
     },
     validate: {
         type: 'Value type',

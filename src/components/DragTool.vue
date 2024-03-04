@@ -30,7 +30,7 @@ import {computed, inject, toRefs, defineComponent} from 'vue';
 let uni = 1;
 export default defineComponent({
     name: 'DragTool',
-    props: ['dragBtn', 'children', 'unique', 'mask'],
+    props: ['dragBtn', 'children', 'unique', 'mask', 'fullWidth'],
     setup(props) {
         const {unique} = toRefs(props);
         const id = computed(() => unique.value || uni++);
@@ -39,6 +39,14 @@ export default defineComponent({
             id,
             state
         };
+    },
+    mounted() {
+        const el =this.$el;
+        const parentElement = el.parentNode;
+        if(this.fullWidth)
+            parentElement.style.display = 'block'
+        else 
+            parentElement.style.display = 'inline-flex'
     },
     methods: {
         active() {

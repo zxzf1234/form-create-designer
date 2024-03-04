@@ -17,6 +17,7 @@ const ZhCn = {
         resetBtn: '是否显示表单重置按钮',
         submit: '提交',
         reset: '重置',
+        inline: '行内表单模式',
     },
     validate: {
         type: '字段类型',

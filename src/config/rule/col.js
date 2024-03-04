@@ -13,6 +13,7 @@ export default {
         return {
             type: name,
             props: {span: 12},
+            fullWidth: true,
             children: []
         };
     },

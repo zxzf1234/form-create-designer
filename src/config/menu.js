@@ -22,6 +22,7 @@ import button from './rule/button';
 import editor from './rule/editor';
 import tab from './rule/tab';
 import group from './rule/group';
+import form from './rule/form';
 
 export default function createMenu({t}) {
     return [
@@ -43,7 +44,7 @@ export default function createMenu({t}) {
             name: 'layout',
             title: t('menu.layout'),
             list: [
-                row, tab, space
+                row, tab, space, form
             ]
         },
     ];
