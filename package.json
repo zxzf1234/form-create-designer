@@ -21,7 +21,10 @@
         "build:locale": "gulp -f gulpfile.js",
         "build:preview": "vite build --config ./vite.config.preview.js"
     },
-    
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/xaboy/form-create-designer.git"
+    },
     "keywords": [
         "表单设计器",
         "@form-create",
@@ -113,7 +116,6 @@
             "path": "./node_modules/cz-customizable"
         }
     },
-    
     "lint-staged": {
         "*.{js,jsx,vue}": [
             "eslint --fix",
