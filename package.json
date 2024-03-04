@@ -21,10 +21,7 @@
         "build:locale": "gulp -f gulpfile.js",
         "build:preview": "vite build --config ./vite.config.preview.js"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/xaboy/form-create-designer.git"
-    },
+   
     "keywords": [
         "表单设计器",
         "@form-create",
@@ -54,9 +51,6 @@
         "url": "https://github.com/xaboy/form-create-designer/issues"
     },
     "homepage": "http://designer.form-create.com",
-    "publishConfig": {
-        "access": "public"
-    },
     "devDependencies": {
         "@element-plus/icons-vue": "^0.2.6",
         "@sixian/css-url": "^1.0.3",
