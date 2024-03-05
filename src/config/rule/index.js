@@ -25,6 +25,8 @@ import button from './button';
 import editor from './editor';
 import group from './group';
 import form from './form';
+import contentWrap from './contentWrap';
+import table from './table';
 
 
 const ruleList = {
@@ -55,6 +57,8 @@ const ruleList = {
     [editor.name]: editor,
     [group.name]: group,
     [form.name]: form,
+    [contentWrap.name]: contentWrap,
+    [table.name]: table,
 };
 
 export default ruleList;

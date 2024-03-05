@@ -362,7 +362,7 @@ export default defineComponent({
                 },
                 value: {
                     form: {
-                        inline: true,
+                        inline: false,
                         hideRequiredAsterisk: false,
                         labelPosition: 'right',
                         size: 'small',
@@ -967,7 +967,8 @@ export default defineComponent({
                             dragBtn: config.dragBtn !== false,
                             children: config.children,
                             mask: dragMask,
-                            fullWidth: rule.fullWidth
+                            fullWidth: rule.fullWidth,
+                            type: rule.type
                         },
                         effect: {
                             _fc_tool: true
@@ -1013,7 +1014,8 @@ export default defineComponent({
                             dragBtn: config.dragBtn !== false,
                             children: config.children,
                             mask: dragMask,
-                            fullWidth: rule.fullWidth
+                            fullWidth: rule.fullWidth,
+                            type: rule.type
                         },
                         effect: {
                             _fc_tool: true

@@ -10,6 +10,64 @@ export function makeRequiredRule() {
     };
 }
 
+export function makeTableColumnRule(t, to, flag) {
+    const options = [
+        {'label': t('props.optionsType.json'), 'value': 0},
+        {'label': t('props.optionsType.fetch'), 'value': 1},
+    ];
+
+    const control = [
+        {
+            value: 0,
+            rule: [
+                {
+                    type: 'Struct',
+                    field: 'formCreate' + upper(to).replace('.', '>'),
+                    props: {defaultValue: []}
+                },
+            ],
+        },
+        {
+            value: 1,
+            rule: [
+                {
+                    type: 'Fetch',
+                    field: 'formCreateEffect>fetch',
+                    props: {
+                        to
+                    }
+                }
+            ]
+        }
+    ];
+
+    if (flag !== false) {
+        options.splice(0, 0, {'label': t('props.optionsType.struct'), 'value': 2});
+        control.push({
+            value: 2,
+            rule: [
+                {
+                    type: 'TableOptions',
+                    field: 'formCreate' + upper(to).replace('.', '>'),
+                    props: {defaultValue: []}
+                },
+            ],
+        });
+    }
+
+    return {
+        type: 'radio',
+        title: t('props.options'),
+        field: '_optionType',
+        value: flag !== false ? 2 : 0,
+        options,
+        props: {
+            type: 'button'
+        },
+        control
+    };
+}
+
 export function makeOptionsRule(t, to, flag) {
     const options = [
         {'label': t('props.optionsType.json'), 'value': 0},

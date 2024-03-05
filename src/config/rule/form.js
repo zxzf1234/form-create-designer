@@ -8,31 +8,38 @@ export default {
     label,
     name,
     mask: false,
+    inside: true,
+    drag: true,
+    dragBtn: false,
     rule() {
         return {
             type: 'el-form',
-            style: 'height:400px;',
+            style: {
+                width: '100%',
+            },
+            class: 'el-form--inline',
             fullWidth: true,
             children: []
         };
     },
     props(_, {t}) {
         return localeProps(t, name + '.props', [{
-            type: 'select',
-            field: 'type',
-            title: '风格类型',
-            options: [{
-                label: 'card',
-                value: 'card'
-            }, {label: 'border-card', value: 'border-card'}]
-        }, {type: 'switch', field: 'closable', title: '标签是否可关闭'}, {
-            type: 'select',
-            field: 'tabPosition',
-            title: '选项卡所在位置',
-            options: [{label: 'top', value: 'top'}, {label: 'right', value: 'right'}, {
-                label: 'left',
-                value: 'left'   
-            }]
-        }, {type: 'switch', field: 'stretch', title: '标签的宽度是否自撑开'}]);
+            type: 'input',
+            field: 'labelWidth',
+            title: '标签长度',
+            
+        },
+        {
+            type: 'switch',
+            field: 'inline',
+            title: '行内表单模式',
+            value: true
+        },
+        {
+            type: 'input',
+            field: 'model',
+            title: '表单数据对象',
+            
+        },]);
     }
 };

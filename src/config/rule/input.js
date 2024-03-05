@@ -35,7 +35,7 @@ export default {
         }, {type: 'switch', field: 'showWordLimit', title: '是否显示输入字数统计'}, {
             type: 'input',
             field: 'placeholder',
-            title: '输入框占位文本'
+            title: '输入框占位文本',
         }, {type: 'switch', field: 'clearable', title: '是否可清空'}, {
             type: 'switch',
             field: 'showPassword',

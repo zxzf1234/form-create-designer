@@ -13,6 +13,7 @@ export default {
         return {
             type: 'el-tabs',
             style: 'width:100%;',
+            fullWidth: true,
             children: []
         };
     },

@@ -23,6 +23,8 @@ import editor from './rule/editor';
 import tab from './rule/tab';
 import group from './rule/group';
 import form from './rule/form';
+import contentWrap from './rule/contentWrap'
+import table from './rule/table'
 
 export default function createMenu({t}) {
     return [
@@ -30,14 +32,14 @@ export default function createMenu({t}) {
             name: 'main',
             title: t('menu.main'),
             list: [
-                input, number, radio, checkbox, select, _switch, time, date, slider, rate, color, cascader, upload, transfer, tree, editor, group
+                input, number, radio, checkbox, select, _switch, time, date, slider, rate, color, cascader, upload, transfer, tree, editor, group, table
             ]
         },
         {
             name: 'aide',
             title: t('menu.aide'),
             list: [
-                alert, button, span, divider
+                alert, button, span, divider, contentWrap
             ]
         },
         {
