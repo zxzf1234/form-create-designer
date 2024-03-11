@@ -14,7 +14,8 @@ export default {
             style: {
                 width: '100%',
             },
-            fullWidth: true
+            fullWidth: true,
+            children: []
         };
     },
     props(_, {t}) {

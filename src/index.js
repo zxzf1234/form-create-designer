@@ -6,6 +6,7 @@ import Validate from './components/Validate.vue';
 import DragBox from './components/DragBox.vue';
 import Required from './components/Required.vue';
 import TableOptions from './components/TableOptions.vue';
+import TableColumnOptions from './components/TableColumnOptions.vue';
 import {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
@@ -13,7 +14,7 @@ import draggable from 'vuedraggable/src/vuedraggable';
 import unique from '@form-create/utils/lib/unique';
 import {makeOptionsRule} from './utils/index';
 import formCreate from './utils/form';
-import globalUseLocale, {t} from "./utils/locale";
+import globalUseLocale, {t} from './utils/locale';
 
 const addComponent = (id, component) => {
     designerForm.component(id, component);
@@ -29,6 +30,7 @@ designerForm.component('Struct', Struct);
 designerForm.component('Fetch', Fetch);
 designerForm.component('Required', Required);
 designerForm.component('TableOptions', TableOptions);
+designerForm.component('TableColumnOptions', TableColumnOptions);
 addComponent('FcEditor', FcEditor);
 
 designerForm.register('_fc', {

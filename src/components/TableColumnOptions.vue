@@ -5,14 +5,25 @@
             border
             size="small"
             style="width: 100%">
-            <template v-for="(col,idx) in column" :key="col.label + idx">
-                <el-table-column :label="col.label">
-                    <template #default="scope">
-                        <el-input size="small" :modelValue="scope.row[col.key] || ''"
-                                  @Update:modelValue="(n)=>(scope.row[col.key] = n, onInput(scope.row))"></el-input>
-                    </template>
-                </el-table-column>
-            </template>
+          
+            <el-table-column label="label">
+                <template #default="scope">
+                    <el-input size="small" :modelValue="scope.row.label || ''"
+                                @Update:modelValue="(n)=>(scope.row.label = n, onInput(scope.row))"></el-input>
+                </template>
+            </el-table-column>
+            <el-table-column label="value">
+                <template #default="scope">
+                    <el-input size="small" :modelValue="scope.row.value || ''"
+                                @Update:modelValue="(n)=>(scope.row.value = n, onInput(scope.row))"></el-input>
+                </template>
+            </el-table-column>
+            <el-table-column label="slot">
+                <template #default="scope">
+                    <el-checkbox size="small" :modelValue="scope.row.slot || ''"
+                                @Update:modelValue="(n)=>(scope.row.slot = n, onInput(scope.row))"></el-checkbox>
+                </template>
+            </el-table-column>
             <el-table-column min-width="50" align="center" fixed="right" :label="t('tableOptions.handle')">
 
                 <template #default="scope">
@@ -38,11 +49,12 @@ export default defineComponent({
     inject: ['designer'],
     data() {
         return {
-            column: [{label: 'label', key: 'label'}, {label: 'value', key: 'value'}],
+           
             t: this.designer.setupState.t,
         };
     },
     created() {
+        window.console.log(this.modelValue)
         if (!Array.isArray(this.modelValue)) {
             this.$emit('input', []);
         }
@@ -57,10 +69,8 @@ export default defineComponent({
             this.$emit('update:modelValue', this.modelValue);
         },
         add() {
-            this.modelValue.push(this.column.reduce((initial, v) => {
-                initial[v.key] = '';
-                return initial;
-            }, {}));
+            
+            this.modelValue.push({label: '', value:'', slot: false});
         },
         del(idx) {
             this.modelValue.splice(idx, 1);

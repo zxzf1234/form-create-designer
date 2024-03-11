@@ -27,6 +27,7 @@ import group from './group';
 import form from './form';
 import contentWrap from './contentWrap';
 import table from './table';
+import tableColumn from './tableColumn';
 
 
 const ruleList = {
@@ -59,6 +60,7 @@ const ruleList = {
     [form.name]: form,
     [contentWrap.name]: contentWrap,
     [table.name]: table,
+    [tableColumn.name]: tableColumn,
 };
 
 export default ruleList;

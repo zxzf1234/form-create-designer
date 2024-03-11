@@ -227,7 +227,7 @@
                                 <ElDivider>{{ t('designer.config.props') }}</ElDivider>
                                 <DragForm v-model:api="propsForm.api" :rule="propsForm.rule"
                                           :option="propsForm.options"
-                                          :modelValue="propsForm.value"
+                                          :modelValue="propsForm.value" style="border:1px solid red"
                                           @change="propChange" @removeField="propRemoveField"></DragForm>
                                 <ElDivider v-if="showBaseRule">{{ t('designer.config.validate') }}</ElDivider>
                                 <DragForm v-show="showBaseRule" v-model:api="validateForm.api"
@@ -795,9 +795,26 @@ export default defineComponent({
                 }
             },
             propChange(field, value, _, fapi) {
+                window.console.log('this is prop change begin---------')
                 if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
                     methods.unWatchActiveRule();
                     const org = field;
+                    // if(field.indexOf('formCreateOptions') === 0){
+                    //     window.console.log('this is formCreateOptions')
+                    //     const rule = []
+                    //     window.console.log('this is data.activeRule before')
+                    //     window.console.log(data.activeRule.children)
+                    //     for (let i = 0; i < value.length; i++){
+                    //         data.activeRule.children.push({
+                    //             type: 'el-table-column',
+                    //             props: {label: value[i]['label'],prop : value[i]['prop']}
+                    //         } );
+                    //     }
+                    //     window.console.log('this is data.activeRule after')
+                    //     window.console.log(data.activeRule.children)
+                         
+                    
+                    // }else 
                     if (field.indexOf('formCreate') === 0) {
                         field = field.replace('formCreate', '');
                         if (!field) return;
@@ -813,7 +830,7 @@ export default defineComponent({
                         } else {
                             data.activeRule[field] = value;
                         }
-                    } else {
+                    }  else {
                         data.activeRule.props[field] = value;
                     }
                     methods.watchActiveRule();
