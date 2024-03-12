@@ -1,7 +1,7 @@
 import {localeProps} from '../../utils';
 
 const label = '按钮';
-const name = 'el-button';
+const name = 'button';
 
 export default {
     icon: 'icon-button',

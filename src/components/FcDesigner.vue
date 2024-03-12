@@ -294,7 +294,6 @@ export default defineComponent({
         const fcx = reactive({active: null});
         provide('fcx', fcx);
         provide('designer', vm);
-        window.console.log(ruleList)
         const config = toRef(props, 'config', {});
         const baseRule = toRef(config.value, 'baseRule', null);
         const componentRule = toRef(config.value, 'componentRule', {});
@@ -795,23 +794,17 @@ export default defineComponent({
                 }
             },
             propChange(field, value, _, fapi) {
-                window.console.log('this is prop change begin---------')
                 if (data.activeRule && fapi[data.activeRule._id] === data.activeRule) {
                     methods.unWatchActiveRule();
                     const org = field;
                     // if(field.indexOf('formCreateOptions') === 0){
-                    //     window.console.log('this is formCreateOptions')
                     //     const rule = []
-                    //     window.console.log('this is data.activeRule before')
-                    //     window.console.log(data.activeRule.children)
                     //     for (let i = 0; i < value.length; i++){
                     //         data.activeRule.children.push({
                     //             type: 'el-table-column',
                     //             props: {label: value[i]['label'],prop : value[i]['prop']}
                     //         } );
                     //     }
-                    //     window.console.log('this is data.activeRule after')
-                    //     window.console.log(data.activeRule.children)
                          
                     
                     // }else 
@@ -929,7 +922,6 @@ export default defineComponent({
                         children.splice(newIndex, 0, rule[0]);
                     }
                 } else {
-                    window.console.log(ruleList)
                     const rule = methods.makeRule(ruleList[menu.name]);
                     children.splice(newIndex, 0, rule);
                 }
@@ -947,7 +939,6 @@ export default defineComponent({
                 // data.dragForm.api.refresh();
             },
             makeRule(config, _rule) {
-                window.console.log(config)
                 const rule = _rule || config.rule({t});
                 rule.config = {config};
                 if (config.component) {
