@@ -227,7 +227,7 @@
                                 <ElDivider>{{ t('designer.config.props') }}</ElDivider>
                                 <DragForm v-model:api="propsForm.api" :rule="propsForm.rule"
                                           :option="propsForm.options"
-                                          :modelValue="propsForm.value" style="border:1px solid red"
+                                          :modelValue="propsForm.value"
                                           @change="propChange" @removeField="propRemoveField"></DragForm>
                                 <ElDivider v-if="showBaseRule">{{ t('designer.config.validate') }}</ElDivider>
                                 <DragForm v-show="showBaseRule" v-model:api="validateForm.api"

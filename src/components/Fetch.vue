@@ -49,67 +49,11 @@ export default defineComponent({
             rule: [
                 {
                     type: 'input',
-                    field: 'action',
+                    field: 'dict',
                     title: t('fetch.action') + ': ',
                     validate: [{required: true, message: t('fetch.actionRequired')}]
                 },
-                {
-                    type: 'select',
-                    field: 'method',
-                    title: t('fetch.method') + ': ',
-                    value: 'GET',
-                    options: [
-                        {label: 'GET', value: 'GET'},
-                        {label: 'POST', value: 'POST'},
-                    ],
-                    control: [
-                        {
-                            value: 'POST',
-                            rule: [
-                                {
-                                    type: 'select',
-                                    field: 'dataType',
-                                    title: t('fetch.dataType') + ': ',
-                                    value: 'FormData',
-                                    options: [
-                                        {label: 'FormData', value: 'FormData'},
-                                        {label: 'JSON', value: 'JSON'},
-                                    ]
-                                },
-                            ]
-                        }
-                    ]
-                },
-                {
-                    type: 'Struct',
-                    field: 'data',
-                    title: t('fetch.data') + ': ',
-                    value: {},
-                    props: {
-                        defaultValue: {},
-                    }
-                },
-                {
-                    type: 'Struct',
-                    field: 'headers',
-                    title: t('fetch.headers') + ': ',
-                    value: {},
-                    props: {
-                        defaultValue: {},
-                    }
-                },
-                {
-                    type: 'Struct',
-                    field: 'parse',
-                    title: t('fetch.parse') + ': ',
-                    info: t('fetch.parseInfo'),
-                    value: null,
-                    props: {
-                        defaultValue: function parse(res){
-                            return res
-},
-                    }
-                },
+                
                 // {
                 //     type: 'input',
                 //     field: '_parse',

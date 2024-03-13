@@ -1593,7 +1593,7 @@ packages:
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
     dev: true
 
-  /@form-create/component-elm-checkbox@3.1.24:
+  /@form-create/component-elm-@3.1.24:
     resolution: {integrity: sha512-VTyOx0z9zidiT6WW3dTb7W2XuSLlUJmNcKeZx2VwbAQsgewYd4fn+FtWlDGVeVNXnDTBCoFzWNCYgkhniLD0ag==}
     dependencies:
       '@form-create/utils': 3.1.23

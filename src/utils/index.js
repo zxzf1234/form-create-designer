@@ -11,7 +11,6 @@ export function makeRequiredRule() {
 }
 
 export function makeTableColumnRule(t, to) {
-    window.console.log('formCreate' + upper(to).replace('.', '>'))
     return {
         type: 'TableColumnOptions',
         title: '字段',
@@ -22,27 +21,18 @@ export function makeTableColumnRule(t, to) {
 
 export function makeOptionsRule(t, to, flag) {
     const options = [
-        {'label': t('props.optionsType.json'), 'value': 0},
+        
         {'label': t('props.optionsType.fetch'), 'value': 1},
     ];
 
     const control = [
-        {
-            value: 0,
-            rule: [
-                {
-                    type: 'Struct',
-                    field: 'formCreate' + upper(to).replace('.', '>'),
-                    props: {defaultValue: []}
-                },
-            ],
-        },
+       
         {
             value: 1,
             rule: [
                 {
                     type: 'Fetch',
-                    field: 'formCreateEffect>fetch',
+                    field: 'formCreateOptions',
                     props: {
                         to
                     }

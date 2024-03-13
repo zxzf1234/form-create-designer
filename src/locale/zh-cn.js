@@ -48,8 +48,8 @@ const ZhCn = {
         error: '输入内容格式有误',
     },
     fetch: {
-        action: '接口',
-        actionRequired: '请数据接口',
+        action: '字典类型',
+        actionRequired: '请填写字典类型',
         method: '请求方式',
         dataType: '提交方式',
         data: '附带数据',
@@ -83,7 +83,7 @@ const ZhCn = {
         option: '选项',
         optionsType: {
             json: 'JSON数据',
-            fetch: '接口数据',
+            fetch: '字典数据',
             struct: '静态数据',
         }
     },
