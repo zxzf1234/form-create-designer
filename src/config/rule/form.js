@@ -37,9 +37,9 @@ export default {
         },
         {
             type: 'input',
-            field: 'model',
+            field: ':model',
             title: '表单数据对象',
-            
+            value: ''
         },]);
     }
 };
