@@ -16,7 +16,7 @@ export default {
             title: t('components.select.name'),
             info: '',
             effect: {
-                fetch: ''
+                event: ['change','blur']
             },
             $required: false,
             props: {},
@@ -25,7 +25,8 @@ export default {
                     label: opt + value,
                     value,
                 }
-            })
+            }),
+            emit:  ['change','blur']
         };
     },
     watch: {

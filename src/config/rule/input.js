@@ -15,7 +15,8 @@ export default {
             title: t('components.input.name'),
             info: '',
             $required: false,
-            props: {}
+            props: {},
+           
         };
     },
     props(_, {t}) {
@@ -23,10 +24,12 @@ export default {
             type: 'select',
             field: 'type',
             title: '类型',
-            options: [{label: 'text', value: 'text'}, {
-                label: 'textarea',
-                value: 'textarea'
-            }, {label: 'number', value: 'number'}, {label: 'password', value: 'password'}]
+            options: [
+                {label: 'text', value: 'text'}, 
+                {label: 'textarea',value: 'textarea'}, 
+                {label: 'number', value: 'number'}, 
+                {label: 'password', value: 'password'}
+            ]
         }, {type: 'inputNumber', field: 'maxlength', title: '最大输入长度', props: {min: 0}}, {
             type: 'inputNumber',
             field: 'minlength',
