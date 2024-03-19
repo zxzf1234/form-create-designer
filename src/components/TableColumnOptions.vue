@@ -54,7 +54,6 @@ export default defineComponent({
         };
     },
     created() {
-        window.console.log(this.modelValue)
         if (!Array.isArray(this.modelValue)) {
             this.$emit('input', []);
         }

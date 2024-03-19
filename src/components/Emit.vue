@@ -7,13 +7,32 @@
 import {designerForm} from '../utils/form';
 import {defineComponent} from 'vue';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
+const componentEventGroup = {
+    input : ['change','visible-change','remove-tag','clear', 'blur', 'focus'],
+    cascader : ['change', 'expand-change', 'blur', 'focus', 'visible-change', 'remove-tag'],
+    checkbox : ['change'],
+    colorPicker : ['change', 'active-change', 'focus', 'blur'],
+    datePicker : ['change', 'blur', 'focus', 'calendar-change', 'panel-change', 'visible-change'],
+    inputNumber: ['change', 'blur', 'focus'],
+    radio :['change'],
+    rate : ['change'],
+    select : ['change', 'visible-change', 'remove-tag', 'clear', 'blur', 'focus'],
+    slider : ['change', 'input'],
+    switch : ['change'],
+    table : ['page-change', 'select', 'select-all','selection-change','cell-mouse-enter','cell-mouse-leave',
+        'cell-click','cell-dblclick', 'cell-contextmenu', 'row-click','row-contextmenu','row-dblclick','header-click',
+        'header-contextmenu','sort-change', 'filter-change', 'current-change','header-dragend','expand-change'],
+    timePicker : ['change', 'blur', 'focus', 'visible-change'],
+    transfer: ['change', 'left-check-change', 'right-check-change'],
+    upload: [],
+    button: ['click']
+}
 
 export default defineComponent({
     name: 'Emit',
     inject: ['designer'],
     props: {
         modelValue: Array,
-        effect: String
     },
     components: {
         DragForm: designerForm.$form(),
@@ -21,9 +40,25 @@ export default defineComponent({
     watch: {},
     data() {
         const t = this.designer.setupState.t;
-        
+        const lenght = this.modelValue.length
+        const componentName = this.modelValue[lenght - 1]
+        let componentEventName = []
+        if(componentName in componentEventGroup){
+            componentEventName = componentEventGroup[componentName]
+        }
+        this.modelValue.splice(lenght-1, 1)
+        const ruleOption = componentEventName.map(value => {
+            return {
+                label: value,
+                value: value,
+            }
+        })
+        let formData = {emit: []}
+        formData['emit'] = this.modelValue.map(function(item) {
+            return {eventName : item['eventName'], function : item['function']};
+        })
         return {
-            formValue: {},
+            formValue: [],
             t,
             option: {
                 form: {
@@ -33,8 +68,7 @@ export default defineComponent({
                 },
                 submitBtn: false,
                 appendValue: true,
-                formData: {},
-                effect:this.effect
+                formData: formData
             },
             rule: [
                 {
@@ -48,16 +82,8 @@ export default defineComponent({
                                 type: 'select',
                                 title: t('emit.eventName'),
                                 field: 'eventName',
-                                value: 'change',
-                                options:  
-                                    
-                                this.modelValue.map(value => {
-                                    return {
-                                        label: value,
-                                        value: value,
-                                    }
-                                })
-                                ,
+                                value: '',
+                                options:  ruleOption,
                                 props: {
                                     'filterable': true,
                                     'allow-create':true,

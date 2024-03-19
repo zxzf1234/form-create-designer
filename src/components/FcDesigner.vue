@@ -929,7 +929,6 @@ export default defineComponent({
                 data.propsForm.value = formData;
                 
                 data.showBaseRule = hasProperty(rule, 'field') && rule.input !== false && (!config.value || config.value.showBaseForm !== false);
-
                 if (data.showBaseRule) {
                     data.baseForm.value = {
                         field: rule.field,
@@ -938,7 +937,9 @@ export default defineComponent({
                         _control: rule._control,
                     };
                     data.validateForm.value = {validate: rule.validate ? [...rule.validate] : []};
-                    data.emitForm.value = {emit: rule.emit ? [...rule.emit] : []};
+                    const type = rule.type == 'el-table' ? 'table' : rule.type
+                    
+                    data.emitForm.value = {emit: rule.emit ? [...rule.emit,type] : [type]};
                     data.dragForm.api.refreshValidate();
                     data.dragForm.api.nextTick(() => {
                         data.dragForm.api.clearValidateState(rule.__fc__.id);

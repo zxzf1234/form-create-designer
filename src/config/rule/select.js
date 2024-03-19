@@ -15,9 +15,6 @@ export default {
             field: uniqueId(),
             title: t('components.select.name'),
             info: '',
-            effect: {
-                event: ['change','blur']
-            },
             $required: false,
             props: {},
             options: [1, 2].map(value => {
