@@ -1,4 +1,4 @@
-import {localeProps,makeTableColumnRule} from '../../utils';
+import {localeProps} from '../../utils';
 import uniqueId from '@form-create/utils/lib/unique';
 
 const label = '列表';
@@ -17,12 +17,26 @@ export default {
                 width: '100%',
             },
             fullWidth: true,
-            children: []
+            children: [],
+            column: [],
+            menu: []
         };
     },
     props(_, {t}) {
-        return localeProps(t, name + '.props', [makeTableColumnRule(t, 'options'),
-            {type: 'input', field: ':columns', title: '字段'},
+        return localeProps(t, name + '.props', [
+            {
+                type: 'TableColumnOptions',
+                title: '字段',
+                field: 'formCreateColumn',
+                props: {defaultValue: []}
+            },
+            {
+                type: 'TableMenuOptions',
+                title: '菜单',
+                field: 'formCreateMenu',
+                props: {defaultValue: []}
+            },
+            {type: 'input', field: ':columns', title: '字段列变量名'},
             {type: 'input', field: ':data', title: '绑定数据'},
             {type: 'input', field: ':page-data', title: '分页绑定数据'},
             {type: 'switch', field: 'adaptive', title: '是否自适应分辨率'},

@@ -20,6 +20,11 @@ export default {
             type: 'input',
             field: 'formCreateChild',
             title: '内容',
+        },
+        {
+            type: 'input',
+            field: 'v-hasPermi',
+            title: '权限',
         }, {
             type: 'select',
             field: 'size',

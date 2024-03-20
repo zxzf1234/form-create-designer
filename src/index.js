@@ -8,6 +8,7 @@ import DragBox from './components/DragBox.vue';
 import Required from './components/Required.vue';
 import TableOptions from './components/TableOptions.vue';
 import TableColumnOptions from './components/TableColumnOptions.vue';
+import TableMenuOptions from './components/TableMenuOptions.vue';
 import {designerForm} from './utils/form';
 import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
@@ -33,6 +34,7 @@ designerForm.component('Fetch', Fetch);
 designerForm.component('Required', Required);
 designerForm.component('TableOptions', TableOptions);
 designerForm.component('TableColumnOptions', TableColumnOptions);
+designerForm.component('TableMenuOptions', TableMenuOptions);
 addComponent('FcEditor', FcEditor);
 
 designerForm.register('_fc', {

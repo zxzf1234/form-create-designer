@@ -10,15 +10,6 @@ export function makeRequiredRule() {
     };
 }
 
-export function makeTableColumnRule(t, to) {
-    return {
-        type: 'TableColumnOptions',
-        title: '字段',
-        field: 'formCreate' + upper(to).replace('.', '>'),
-        props: {defaultValue: []}
-    };
-}
-
 export function makeOptionsRule(t, to, flag) {
     const options = [
         
