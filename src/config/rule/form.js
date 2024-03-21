@@ -40,6 +40,18 @@ export default {
             field: ':model',
             title: '表单数据对象',
             value: ''
+        },
+        {
+            type: 'input',
+            field: 'ref',
+            title: 'ref对象',
+            value: ''
+        },
+        {
+            type: 'input',
+            field: ':rules',
+            title: '表单验证规则对象',
+            value: ''
         },]);
     }
 };

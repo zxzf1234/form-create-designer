@@ -236,13 +236,11 @@
                                           :modelValue="validateForm.value"
                                           @update:modelValue="validateChange"></DragForm>
                                 <ElDivider v-if="showBaseRule">{{ t('designer.config.emit') }}</ElDivider>
-                                <DragForm v-show="showBaseRule" v-model:api="emitForm.api"
-                                          :rule="emitForm.rule"
-                                          :option="emitForm.options"
-                                          :modelValue="emitForm.value"
-                                          :emit="emitForm.emit"
-                                          effect="emitForm.effect"
-                                          @update:modelValue="emitChange"></DragForm>
+                                <DragForm v-show="showBaseRule" v-model:api="eventFrom.api"
+                                          :rule="eventFrom.rule"
+                                          :option="eventFrom.options"
+                                          :modelValue="eventFrom.value"
+                                          @update:modelValue="eventChange"></DragForm>
                             </div>
                         </ElMain>
                     </ElContainer>
@@ -264,7 +262,7 @@
 import form from '../config/base/form';
 import field from '../config/base/field';
 import validate from '../config/base/validate';
-import emit from '../config/base/emit';
+import event from '../config/base/event';
 import {deepCopy} from '@form-create/utils/lib/deepextend';
 import is, {hasProperty} from '@form-create/utils/lib/type';
 import {lower} from '@form-create/utils/lib/tocase';
@@ -307,7 +305,7 @@ export default defineComponent({
         const baseRule = toRef(config.value, 'baseRule', null);
         const componentRule = toRef(config.value, 'componentRule', {});
         const validateRule = toRef(config.value, 'validateRule', null);
-        const emitRule = toRef(config.value, 'emitRule', null);
+        const eventRule = toRef(config.value, 'eventRule', null);
         const formRule = toRef(config.value, 'formRule', null);
         const dragHeight = computed(() => {
             const h = height.value;
@@ -414,11 +412,10 @@ export default defineComponent({
                     }
                 }
             },
-            emitForm: {
-                rule: tidyRuleConfig(emit, emitRule.value, {t}),
+            eventFrom: {
+                rule: tidyRuleConfig(event, eventRule.value, {t}),
                 api: {},
                 value: [],
-                effect: {},
                 options: {
                     form: {
                         labelPosition: 'top',
@@ -464,9 +461,9 @@ export default defineComponent({
             const formVal = data.form.api.formData && data.form.api.formData();
             const baseFormVal = data.baseForm.api.formData && data.baseForm.api.formData();
             const validateFormVal = data.validateForm.api.formData && data.validateForm.api.formData();
-            const emitFormVal = data.emitForm.api.formData && data.emitForm.api.formData();
+            const eventFromVal = data.eventFrom.api.formData && data.eventFrom.api.formData();
             data.validateForm.rule = tidyRuleConfig(validate, validateRule.value, {t});
-            data.emitForm.rule = tidyRuleConfig(emit, emitRule.value, {t});
+            data.eventFrom.rule = tidyRuleConfig(event, eventRule.value, {t});
             data.baseForm.rule = tidyRuleConfig(field, baseRule.value, {t});
             data.form.rule = tidyRuleConfig(form, formRule.value, {t});
             data.cacheProps = {};
@@ -484,7 +481,7 @@ export default defineComponent({
                 formVal && data.form.api.setValue(formVal);
                 baseFormVal && data.baseForm.api.setValue(baseFormVal);
                 validateFormVal && data.validateForm.api.setValue(validateFormVal);
-                emitFormVal && data.emitForm.api.setValue(emitFormVal);
+                eventFromVal && data.eventFrom.api.setValue(eventFromVal);
                 propsVal && data.propsForm.api.setValue(propsVal);
             });
         });
@@ -683,9 +680,9 @@ export default defineComponent({
                 validateRule.value = {rule, append};
                 data.validateForm.rule = tidyRuleConfig(field, validateRule.value, {t});
             },
-            setEmitRuleConfig(rule, append) {
-                emitRule.value = {rule, append};
-                data.emitForm.rule = tidyRuleConfig(field, emitRule.value, {t});
+            setEventRuleConfig(rule, append) {
+                eventRule.value = {rule, append};
+                data.eventFrom.rule = tidyRuleConfig(field, eventRule.value, {t});
             },
             setFormRuleConfig(rule, append) {
                 formRule.value = {rule, append};
@@ -877,10 +874,11 @@ export default defineComponent({
                     data.dragForm.api.clearValidateState(data.activeRule.__fc__.id);
                 });
             },
-            emitChange(formData) {
-                if (!data.activeRule || data.emitForm.api[data.activeRule._id] !== data.activeRule) return;
-                data.activeRule.emit = formData.emit || [];
-                
+            eventChange(formData) {
+                methods.unWatchActiveRule();
+                if (!data.activeRule || data.eventFrom.api[data.activeRule._id] !== data.activeRule) return;
+                data.activeRule.event = formData.event || [];
+                methods.watchActiveRule();
             },
             toolActive(rule) {
                 methods.unWatchActiveRule();
@@ -888,7 +886,7 @@ export default defineComponent({
                     delete data.propsForm.api[data.activeRule._id];
                     delete data.baseForm.api[data.activeRule._id];
                     delete data.validateForm.api[data.activeRule._id];
-                    delete data.emitForm.api[data.activeRule._id];
+                    delete data.eventFrom.api[data.activeRule._id];
                     delete data.dragForm.api.activeRule;
                 }
                 data.activeRule = rule;
@@ -900,7 +898,7 @@ export default defineComponent({
                         data.propsForm.api[data.activeRule._id] = data.activeRule;
                         data.baseForm.api[data.activeRule._id] = data.activeRule;
                         data.validateForm.api[data.activeRule._id] = data.activeRule;
-                        data.emitForm.api[data.activeRule._id] = data.activeRule;
+                        data.eventFrom.api[data.activeRule._id] = data.activeRule;
                     });
                 });
                 if (!data.cacheProps[rule._id]) {
@@ -938,8 +936,10 @@ export default defineComponent({
                     };
                     data.validateForm.value = {validate: rule.validate ? [...rule.validate] : []};
                     const type = rule.type == 'el-table' ? 'table' : rule.type
-                    
-                    data.emitForm.value = {emit: rule.emit ? [...rule.emit,type] : [type]};
+                    if(rule.event !== undefined && rule.event[rule.event.length - 1] === type)
+                        data.eventFrom.value = {event: rule.event ? [...rule.event] : []};
+                    else
+                        data.eventFrom.value = {event: rule.event ? [...rule.event, type] : [type]};
                     data.dragForm.api.refreshValidate();
                     data.dragForm.api.nextTick(() => {
                         data.dragForm.api.clearValidateState(rule.__fc__.id);
@@ -1116,4 +1116,4 @@ export default defineComponent({
         };
     }
 });
-</script>
+</script>../config/base/event

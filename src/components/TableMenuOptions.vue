@@ -67,7 +67,7 @@ export default defineComponent({
             this.$emit('update:modelValue', this.modelValue);
         },
         add() {
-            this.modelValue.push({label: '', value:'', slot: false});
+            this.modelValue.push({label: '', function:'', hasPermi: ''});
         },
         del(idx) {
             this.modelValue.splice(idx, 1);

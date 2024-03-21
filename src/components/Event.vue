@@ -29,10 +29,10 @@ const componentEventGroup = {
 }
 
 export default defineComponent({
-    name: 'Emit',
+    name: 'Event',
     inject: ['designer'],
     props: {
-        modelValue: Array,
+        modelValue: Array
     },
     components: {
         DragForm: designerForm.$form(),
@@ -53,10 +53,11 @@ export default defineComponent({
                 value: value,
             }
         })
-        let formData = {emit: []}
-        formData['emit'] = this.modelValue.map(function(item) {
+        let formData = {event: []}
+        formData['event'] = this.modelValue.map(function(item) {
             return {eventName : item['eventName'], function : item['function']};
         })
+        
         return {
             formValue: [],
             t,
@@ -73,7 +74,7 @@ export default defineComponent({
             rule: [
                 {
                     type: 'group',
-                    field: 'emit',
+                    field: 'event',
                     props: {
                         expand: 1,
                         sortBtn: false,
@@ -95,8 +96,7 @@ export default defineComponent({
                                 type: 'input',
                                 title: t('emit.function'),
                                 field: 'function',
-                                value: '',
-                                children: []
+                                value: ''
                             }
                         ]
                     },
@@ -108,11 +108,11 @@ export default defineComponent({
     methods: {
         onInput: function (formData) {
             let val = [];
-            const {emit} = deepCopy(formData);
-            if (!emit || !emit.length) {
+            const {event} = deepCopy(formData);
+            if (!event || !event.length) {
                 return;
             }
-            val = [...emit];
+            val = [...event];
             this.$emit('update:modelValue', val);
         },
     }

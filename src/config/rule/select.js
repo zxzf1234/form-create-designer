@@ -23,7 +23,6 @@ export default {
                     value,
                 }
             }),
-            emit:  ['change','blur']
         };
     },
     watch: {
