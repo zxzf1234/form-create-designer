@@ -1,7 +1,7 @@
 <template>
     <div class="_fc_table_opt">
         <el-table
-            :data="modelValue"
+            :data="columnValue"
             border
             size="small"
             style="width: 100%">
@@ -12,10 +12,10 @@
                                 @Update:modelValue="(n)=>(scope.row.label = n, onInput(scope.row))"></el-input>
                 </template>
             </el-table-column>
-            <el-table-column label="value">
+            <el-table-column label="prop">
                 <template #default="scope">
-                    <el-input size="small" :modelValue="scope.row.value || ''"
-                                @Update:modelValue="(n)=>(scope.row.value = n, onInput(scope.row))"></el-input>
+                    <el-input size="small" :modelValue="scope.row.prop || ''"
+                                @Update:modelValue="(n)=>(scope.row.prop = n, onInput(scope.row))"></el-input>
                 </template>
             </el-table-column>
             <el-table-column label="slot">
@@ -49,31 +49,31 @@ export default defineComponent({
     inject: ['designer'],
     data() {
         return {
-           
             t: this.designer.setupState.t,
+            columnValue : this.modelValue === undefined? [] : this.modelValue
         };
     },
     created() {
-        if (!Array.isArray(this.modelValue)) {
+        if (!Array.isArray(this.columnValue)) {
             this.$emit('input', []);
         }
     },
     methods: {
         onInput(item) {
-            if (item.label !== undefined && item.value !== undefined) {
+            if (item.label !== undefined && item.prop !== undefined) {
                 this.input();
             }
         },
         input() {
-            this.$emit('update:modelValue', this.modelValue);
+            this.$emit('update:modelValue', this.columnValue);
         },
         add() {
             
-            this.modelValue.push({label: '', value:'', slot: false});
+            this.columnValue.push({label: '', prop:'', slot: false});
         },
         del(idx) {
-            this.modelValue.splice(idx, 1);
-            this.input(this.modelValue);
+            this.columnValue.splice(idx, 1);
+            this.input(this.columnValue);
         }
     }
 });

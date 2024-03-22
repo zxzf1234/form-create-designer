@@ -1,7 +1,7 @@
 <template>
     <div class="_fc_table_opt">
         <el-table
-            :data="modelValue"
+            :data="menuValue"
             border
             size="small"
             style="width: 100%">
@@ -49,29 +49,30 @@ export default defineComponent({
     data() {
         return {
             t: this.designer.setupState.t,
+            menuValue : this.modelValue === undefined? [] : this.modelValue
         };
     },
     created() {
-        if (!Array.isArray(this.modelValue)) {
+        if (!Array.isArray(this.menuValue)) {
             this.$emit('input', []);
         }
-        
     },
     methods: {
         onInput(item) {
-            if (item.label !== undefined && item.value !== undefined) {
+            if (item.label !== undefined && item.function !== undefined) {
                 this.input();
             }
         },
         input() {
-            this.$emit('update:modelValue', this.modelValue);
+            this.$emit('update:modelValue', this.menuValue);
         },
         add() {
-            this.modelValue.push({label: '', function:'', hasPermi: ''});
+            this.menuValue.push({label: '', function:'', hasPermi: ''});
+            
         },
         del(idx) {
-            this.modelValue.splice(idx, 1);
-            this.input(this.modelValue);
+            this.menuValue.splice(idx, 1);
+            this.input(this.menuValue);
         }
     }
 });
