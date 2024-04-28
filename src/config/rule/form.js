@@ -33,7 +33,7 @@ export default {
             type: 'switch',
             field: 'inline',
             title: '行内表单模式',
-            value: true
+            value: false
         },
         {
             type: 'input',
